@@ -5,6 +5,8 @@ from telegram.ext import ContextTypes
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler
 import os
 
+import os
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.DEBUG
@@ -40,9 +42,16 @@ async def commd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id,
                                    text="Add me in any group. Make me an Admin & I Will send you viewable Videos Youtube Shorts")
 
+                              
+
+# Retrieve the bot token from the environment
+token = os.getenv('BOT_TOKEN')
+
+if not token:
+    raise ValueError("Bot token is not set in the environment variable 'BOT_TOKEN'")    
+
 
 if __name__ == '__main__':
-    token = 'TOKEN_FROM_BOT_FATHER'
     application = ApplicationBuilder().token(token).build()
 
     commands = CommandHandler('start', commd)
